@@ -1,11 +1,11 @@
 
 class SiteController {
 
-    // [GET] /site
+    // [GET] /
     index(req,res){
        res.render('home');
     }
-    // [GET] /site/search
+    // [GET] /search
     search(req, res){       
         res.render('search');
     }

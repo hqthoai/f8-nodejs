@@ -20,17 +20,12 @@
   "homepage": "https://github.com/quocthoai0109/f8-nodejs#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "express-handlebars": "^7.0.7"
+    "express-handlebars": "^7.0.7",
+    "method-override": "^3.0.0",
+    "mongoose": "^7.2.2",
+    "mongoose-delete": "^0.5.4",
+    "mongoose-slug-generator": "^1.0.4"
   },
-  "lint-staged": {
-    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
-  },
-  "husky":{
-    "hooks":{
-      "pre-commit": "lint-staged"
-    }
-  }
-  ,
   "devDependencies": {
     "morgan": "^1.10.0",
     "node-sass": "^9.0.0",

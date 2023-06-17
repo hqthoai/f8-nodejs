@@ -1,0 +1,93 @@
+<div class="mt-4">
+  <h1>Trash User</h1>
+  <a href="/users/manage-user">Back List User</a>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Deleted</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+      <tr>
+        <th scope="row">{{sum @index 1}}</th>
+        <td>{{this.name}}</td>
+        <td>{{this.phone}}</td>
+        <td>{{this.deletedAt}}</td>
+        <td>
+          <a class="btn btn-primary btn-restore" data-id="{{this._id}}">Restore User</a>
+        </td>
+        <td>
+          <a class="btn btn-primary" data-id="{{this._id}}" data-toggle="modal" data-target="#notify">Delete Forever</a>
+        </td>
+      </tr>
+      {{else}}
+      <tr>
+        <td colspan="5" class="text-center">
+          <h1>No Deleted Account To Show.</h1>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<!--Notification -->
+<div class="modal fade" id="notify" tabindex="-1" role="dialog" aria-labelledby="notify" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete User Forever ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This action cannot be undone. Do you really want to delete forever?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="btn-delete-user" type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<form name="delete-user-form" method="POST" action=""></form>
+<form name="restore-user-form" method="POST" action=""></form>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var userId;
+    var deleteForm = document.forms['delete-user-form'];
+    var restoreForm = document.forms['restore-user-form'];
+    var btnDeleteUser = document.getElementById('btn-delete-user');
+    var btnRestore = $('.btn-restore');
+    // when dialog confirm clicked
+    $('#notify').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      userId = button.data('id')
+    })
+
+    btnDeleteUser.onclick = function () {
+      deleteForm.action = '/users/' + userId + '/force?_method=DELETE';
+      deleteForm.submit();
+    }
+
+    btnRestore.click(function (event) {
+      event.preventDefault();
+
+      var uId = $(this).data('id');
+      restoreForm.action = '/users/' + uId + '/restore?_method=PATCH';
+      restoreForm.submit();
+    });
+  });
+</script>

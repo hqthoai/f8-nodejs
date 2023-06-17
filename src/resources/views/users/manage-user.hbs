@@ -1,0 +1,118 @@
+<div class="mt-4">
+    <h1>Mange User</h1>
+    <a class="text-right" href="/users/trash-user">Trash</a>
+    <div class="mt-4">
+
+    </div>
+    <div class="table-responsive">
+
+
+        <table class="table mt-4">
+            <thead>
+                <tr>
+
+                    <th scope="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="check-box-all">
+                            <label class="form-check-label" for="check-box-all">
+                                Select All
+                            </label>
+                        </div>
+                    </th>
+                    <th scope="col">No</th>
+                    <th scope="col">
+                        Name
+                        {{{sortable 'name' _sort}}}
+                    </th>
+                    <th scope="col">
+                        Phone
+
+                    </th>
+                    <th scope="col">
+                        Created
+
+                    </th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users}}
+                <tr>
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="userId[]" value="{{this._id}}">
+
+                        </div>
+                    </td>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.phone}}</td>
+                    <td>{{this.createdAt}}</td>
+                    <td>
+                        <a href="{{this._id}}/edit" class="btn btn-primary">Update</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" data-id="{{this._id}}" data-toggle="modal"
+                            data-target="#notify">Delete</a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <h1>No Account To Show.</h1>
+                        <a href="/users/create">Add Account</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Notification -->
+<div class="modal fade" id="notify" tabindex="-1" role="dialog" aria-labelledby="notify" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete User ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="btn-delete-user" type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Delete Hiden Form --}}
+<form name="delete-user-form" method="POST" action="">
+
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var userId;
+        var deleteForm = document.forms['delete-user-form'];
+        var btnDeleteUser = document.getElementById('btn-delete-user');
+        var checkboxAll = $('#check-box-all');
+
+        // when dialog confirm clicked
+        $('#notify').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            userId = button.data('id')
+        })
+
+        btnDeleteUser.onclick = function () {
+            deleteForm.action = '/users/' + userId + '?_method=DELETE';
+            deleteForm.submit();
+        }
+
+    });
+</script>

@@ -1,0 +1,81 @@
+<div class="container mt-4">
+    <h1>Bakery Products</h1>
+    <div class="row">
+        {{#if cakes.length}}
+        {{#each cakes}}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="{{this.pictures}}" class="card-img-top" alt="{{this.name}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">{{this.price}} VND</p>
+                    <p class="card-text">{{this.description}} stars</p>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="col-md-12">
+            <p>No products found</p>
+        </div>
+        {{/if}}
+    </div>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h4>About Us</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, lacus vel dictum lacinia, mauris tellus convallis sapien, eget aliquet odio sapien vel ex. Fusce sit amet justo ut sapien scelerisque pharetra ac eu nibh.</p>
+      </div>
+      <div class="col-md-4">
+        <h4>Our Products</h4>
+        <ul>
+          <li><a href="#">Bread</a></li>
+          <li><a href="#">Cakes</a></li>
+          <li><a href="#">Pastries</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h4>Contact Us</h4>
+        <p>123 Main Street<br>
+           Anytown, USA<br>
+           Phone: (123) 456-7890<br>
+           Email: info@bakery.com
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p>&copy; 2023 Bakery. All rights reserved.</p>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

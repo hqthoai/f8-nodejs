@@ -3,3 +3,29 @@ h1 {
 
 h2 {
   color: green; }
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 4px; }
+
+.cake-picture {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  margin-right: 4px; }
+
+.card-img-top {
+  width: 100%;
+  height: 100%; }
+
+.carousel-item img {
+  height: 500px;
+  object-fit: cover; }
+
+.footer {
+  border: 1px solid;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px; }
